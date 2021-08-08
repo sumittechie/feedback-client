@@ -1,1 +1,11 @@
-<p>home works!</p>
+<fb-header [sidenav]="leftSidenav"></fb-header>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #leftSidenav mode="side" opened>
+    <fb-navigation></fb-navigation>
+  </mat-sidenav>
+  <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+    <div class="main_content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

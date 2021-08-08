@@ -78,6 +78,11 @@ $fb-theme: mat-light-theme(
   color: #fff;
 }
 
+.error-snackbar {
+    background: mat-color($fb-warn);
+    color: #fff;
+  }
+
 .ym-table {
   padding: 10px 10px 0 10px;
   table {
