@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+@import "~@angular/material/theming";
+
+$fb-typography: mat-typography-config(
+  $button: mat-typography-level(14px, 14px, 500),
+  $font-family: "Roboto Condensed",
+);
+
+@include mat-core($fb-typography);
+
+$fb-primary: mat-palette($mat-red, A700);
+$fb-accent: mat-palette($mat-gray, 900);
+$fb-warn: mat-palette($mat-red);
+$fb-theme: mat-light-theme(
+  (
+    color: (
+      primary: $fb-primary,
+      accent: $fb-accent,
+      warn: $fb-warn,
+    ),
+  )
+);
+
+@include angular-material-theme($fb-theme);
+
+.mat-card-header {
+  background-color: mat-color($fb-warn);
+  .mat-card-title {
+    color: $light-primary-text;
+  }
+  .mat-card-subtitle {
+    color: mat-color($fb-accent);
+  }
+}
+
+.bg-accent {
+  background-color: mat-color($fb-accent);
+}
+
+.bg-primary {
+  background-color: mat-color($fb-primary);
+}
+
+.mat-toolbar {
+  font-size: 14px !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+.mat-dialog-title {
+  margin: 0 !important;
+  padding: 10px 20px !important;
+}
+.mat-dialog-content {
+  margin: 0 !important;
+  padding: 20px !important;
+}
+
+.mat-dialog-actions {
+  margin-bottom: 0 !important;
+  padding: 10px 20px !important;
+}
+
+.success-snackbar {
+  background: #00a86b;
+  color: #fff;
+}
+
+.ym-table {
+  padding: 10px 10px 0 10px;
+  table {
+    width: 100%;
+    .mat-row {
+      height: 28px !important;
+    }
+
+    .mat-header-row {
+      height: 35px;
+      .mat-header-cell {
+        font-weight: bold;
+        color: #000;
+      }
+    }
+    .mat-footer-row {
+      height: 30px !important;
+      .mat-footer-cell {
+        font-weight: bold;
+        color: #000;
+      }
+    }
+
+    .mat-cell {
+      font-size: 12px;
+    }
+
+    
+  }
+  .mat-paginator-container {
+    min-height: 40px !important;
+  }
+}
