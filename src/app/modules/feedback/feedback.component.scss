@@ -1,0 +1,60 @@
+.content {
+  padding: 16px;
+
+  .reply-list {
+      height: 520px;
+      overflow-x: auto;
+      padding-right: 10px;
+      scrollbar-width: none;
+    .mat-card-header .mat-card-subtitle:not(:first-child) {
+      margin-top: -15px;
+    }
+
+    .mat-card-header .mat-card-title {
+      font-size: 16px;
+      color:#000;
+    }
+    .mat-card-subtitle {
+      font-size: 12px;
+    }
+    .mat-card {
+        margin-bottom: 10px;
+    }
+    
+  }
+  .reply-body {
+    .mat-card-content {
+      height: 375px;
+      .mat-form-field {
+        width: 100%;
+        textarea {
+          height: 350px !important;
+        }
+      }
+    }
+  }
+}
+
+.action-bar {
+  background-color: #fff;
+  height: 45px;
+  min-height: 45px;
+  padding-left: 8px;
+  padding-right: 8px;
+  h5 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  button {
+    min-width: 48px;
+    padding: 0 16px;
+    color: rgb(98, 96, 240) !important;
+    :hover {
+      color: #000 !important;
+    }
+    .mat-button-wrapper:hover {
+      color: #000 !important;
+    }
+  }
+}

@@ -11,6 +11,13 @@ const routes: Routes = [
     canActivate: [AuthenticateGuard],
     children: [
       {
+        path: '',
+        loadChildren: () =>
+          import('./modules/feedback/feedback.module').then(
+            (m) => m.FeedbackModule
+          ),
+      },
+      {
         path: 'users',
         loadChildren: () =>
           import('./modules/users/users.module').then((m) => m.UsersModule),

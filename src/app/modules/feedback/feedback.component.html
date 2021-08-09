@@ -1,0 +1,60 @@
+<mat-toolbar class="action-bar mat-elevation-z2">
+  <mat-toolbar-row fxLayout="row">
+    <h5 fxFlex="50%" fxLayoutAlign="start center">Home</h5>
+    <div fxFlex="50%" fxLayoutAlign="end center"></div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px" *ngIf="questions">
+    <div fxFlex="28.5%" fxFlex.xs="100%" fxFlex.sm="33%" class="reply-list">
+      <ng-container *ngFor="let q of questions">
+        <mat-card (click)="onSelect(q.id)">
+          <mat-card-header>
+            <img mat-card-avatar [src]="q.photo" [alt]="q.from" />
+            <mat-card-title>{{ q.from }}</mat-card-title>
+            <mat-card-subtitle>{{
+              q.lastUpdated | date: "medium"
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ q.question }}</p>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div *ngIf="question" fxFlex="70%" class="reply-body">
+      <form [formGroup]="form">
+        <mat-card>
+          <mat-card-header>
+            <img mat-card-avatar [src]="question.photo" [alt]="question.from" />
+            <mat-card-title>Reply</mat-card-title>
+            <mat-card-subtitle>{{ question.question }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="fill">
+              <mat-label>Reply of feedback</mat-label>
+              <textarea
+                matInput
+                formControlName="reply"
+                placeholder="Type your feedback text"
+              ></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions fxLayoutAlign="center center">
+            <button color="accent" (click)="onCancle()" mat-raised-button>
+              <mat-icon>close</mat-icon> Cancel
+            </button>
+            <button
+              [disabled]="form.invalid"
+              color="primary"
+              (click)="onSend()"
+              mat-raised-button
+            >
+              <mat-icon>check</mat-icon> Send
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

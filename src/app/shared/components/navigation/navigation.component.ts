@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   public linkText: boolean = true;
 
   public pages: IPage[] = [
+    { name: 'Home', link: '', icon: 'home' },
     { name: 'Users', link: '/users', icon: 'manage_accounts' },
     { name: 'Feeback', link: '/feedbacks', icon: 'assignments' },
   ];

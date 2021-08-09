@@ -7,3 +7,4 @@ export * from './i-page';
 export * from './i-user';
 export * from './i-user-info';
 export * from './i-login-response';
+export * from './i-questions';

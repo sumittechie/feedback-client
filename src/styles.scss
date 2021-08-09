@@ -34,15 +34,15 @@ $fb-theme: mat-light-theme(
 
 @include angular-material-theme($fb-theme);
 
-.mat-card-header {
-  background-color: mat-color($fb-warn);
-  .mat-card-title {
-    color: $light-primary-text;
-  }
-  .mat-card-subtitle {
-    color: mat-color($fb-accent);
-  }
-}
+// .mat-card-header {
+//   background-color: mat-color($fb-warn);
+//   .mat-card-title {
+//     color: $light-primary-text;
+//   }
+//   .mat-card-subtitle {
+//     color: mat-color($fb-accent);
+//   }
+// }
 
 .bg-accent {
   background-color: mat-color($fb-accent);

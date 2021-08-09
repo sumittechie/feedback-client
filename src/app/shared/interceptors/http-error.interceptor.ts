@@ -33,6 +33,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this._logger.error('No internet connection');
           }
 
+          if(error.status === 0) {
+            this._logger.error('Web API server is unavailable.');
+            this._loginService.logout();
+          }
+
           //Handle Http Error Status
           if (error.status === 401 || error.status === 403) {
             this._loginService.logout();
