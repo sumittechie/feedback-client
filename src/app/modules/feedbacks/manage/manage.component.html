@@ -1,0 +1,52 @@
+<h2 mat-dialog-title class="bg-accent">Create New Feedback</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="createForm" fxLayout="column">
+    <mat-form-field appearance="fill">
+      <mat-label>Feedback Question</mat-label>
+      <textarea
+        matInput
+        formControlName="question"
+        placeholder="Type your question on which you need feedback"
+      ></textarea>
+      <mat-error *ngIf="question?.hasError('required')">
+        Feedback question is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Assigne To</mat-label>
+      <mat-chip-list #chipList aria-label="User List">
+        <mat-chip
+          *ngFor="let user of users"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(user)"
+        >
+          {{ user.name }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Search User"
+          #assigneeInput
+          formControlName="assignee"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+          {{ user.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button [disabled]="createForm.invalid" mat-stroked-button cdkFocusInitial (click)="onSubmit()">
+    Submit
+  </button>
+</mat-dialog-actions>

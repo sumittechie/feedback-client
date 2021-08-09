@@ -46,10 +46,12 @@ $fb-theme: mat-light-theme(
 
 .bg-accent {
   background-color: mat-color($fb-accent);
+  color: #ffffff;
 }
 
 .bg-primary {
   background-color: mat-color($fb-primary);
+  color: #ffffff;
 }
 
 .mat-toolbar {
@@ -83,7 +85,7 @@ $fb-theme: mat-light-theme(
     color: #fff;
   }
 
-.ym-table {
+.fb-table {
   padding: 10px 10px 0 10px;
   table {
     width: 100%;
@@ -114,5 +116,12 @@ $fb-theme: mat-light-theme(
   }
   .mat-paginator-container {
     min-height: 40px !important;
+  }
+
+  .mat-icon-button {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 5px !important;
   }
 }

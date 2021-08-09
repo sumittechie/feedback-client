@@ -16,9 +16,10 @@ import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
-import { GlobalErrorHandler } from './shared/services/global-error-handler.service';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GlobalErrorHandler } from './shared/services/error-handler.service';
+import { HttpHeadersInterceptor } from './shared/interceptors/http-header.interceptor';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
@@ -37,10 +38,16 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'INR' },
     { provide: LOCALE_ID, useValue: 'en-IN' },
-    // {
-    //   provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-    //   useValue: { appearance: 'fill' },
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeadersInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

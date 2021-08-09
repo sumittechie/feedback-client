@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { animateText, onSideNavChange } from '../../animations/navigations.animations';
+import {
+  animateText,
+  onSideNavChange,
+} from '../../animations/navigations.animations';
 import { IPage } from '../../models/i-page';
 import { NavigationService } from '../../services/navigation.service';
 
@@ -14,9 +17,8 @@ export class NavigationComponent implements OnInit {
   public linkText: boolean = true;
 
   public pages: IPage[] = [
-    { name: 'Users', link: '/orders', icon: 'manage_accounts' },
-    { name: 'Feeback', link: '/sells', icon: 'assignments' },
-    { name: 'Manufacturers', link: '/manufactures', icon: 'apartment' },
+    { name: 'Users', link: '/users', icon: 'manage_accounts' },
+    { name: 'Feeback', link: '/feedbacks', icon: 'assignments' },
   ];
 
   constructor(private _sidenavService: NavigationService) {}
