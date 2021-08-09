@@ -49,7 +49,7 @@
       Gender is required
     </mat-error>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="userDetails?.id === null">
       <mat-label>Password</mat-label>
       <input matInput formControlName="password" placeholder="Enter password" />
       <mat-error *ngIf="password?.hasError('required')">

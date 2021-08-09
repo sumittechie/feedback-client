@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IUsers } from 'src/app/shared/models';
 import { IUserSave } from 'src/app/shared/models/i-user-save';
 
@@ -12,17 +12,22 @@ import { IUserSave } from 'src/app/shared/models/i-user-save';
 export class ManageComponent implements OnInit {
   form!: FormGroup;
   isAdmin!: boolean;
+  userDetails: any;
+
   constructor(
     private readonly _fb: FormBuilder,
-    private dialogRef: MatDialogRef<ManageComponent>
-  ) {}
+    private dialogRef: MatDialogRef<ManageComponent>,
+    @Inject(MAT_DIALOG_DATA) data?: any
+  ) {
+    this.userDetails = data;
+  }
 
-  private initForm(data?: any) {
+  private initForm(data?: IUserSave) {
     this.form = this._fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      name: [data?.name, Validators.required],
+      email: [data?.email, [Validators.required, Validators.email]],
       mobile: [
-        '',
+        data?.mobile,
         [
           Validators.required,
           Validators.pattern('^(0|[1-9][0-9]*)$'),
@@ -30,10 +35,14 @@ export class ManageComponent implements OnInit {
           Validators.maxLength(10),
         ],
       ],
-      isAdmin: [false],
-      gender: ['Male', Validators.required],
+      isAdmin: [data?.isAdmin || false],
+      gender: [data?.gender, Validators.required],
       password: ['', Validators.required],
     });
+
+    if (data?.id) {
+      this.form.removeControl('password');
+    }
   }
 
   get name() {
@@ -61,7 +70,8 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
+    console.log('Response', this.userDetails);
+    this.initForm(this.userDetails);
     this.admin?.valueChanges.subscribe(
       (flag: boolean) => (this.isAdmin = flag)
     );
@@ -76,6 +86,10 @@ export class ManageComponent implements OnInit {
       password: this.password?.value,
       email: this.email?.value,
     };
+
+    if (this.userDetails.id) {
+      userObj.id = this.userDetails.id;
+    }
 
     this.dialogRef.close(userObj);
   }

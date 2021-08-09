@@ -10,13 +10,19 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  api = `${environment.api}/user`;
+  api = `${environment.api}/user/`;
 
   constructor(private readonly _http: HttpClient) {}
 
   getDropdownUsers(): Observable<IApiResponse> {
     return this._http
-      .get(`${this.api}/dropdown`)
+      .get(`${this.api}dropdown`)
+      .pipe(map((response: any) => response));
+  }
+
+  get(id: string): Observable<IApiResponse> {
+    return this._http
+      .get(`${this.api}${id}`)
       .pipe(map((response: any) => response));
   }
 
@@ -29,4 +35,9 @@ export class UsersService {
       .post(this.api, userObj)
       .pipe(map((response: any) => response));
   }
+
+  delete(id: string): Observable<IApiResponse> {
+    return this._http.delete(`${this.api}${id}`).pipe(map((response: any) => response));
+  }
+
 }

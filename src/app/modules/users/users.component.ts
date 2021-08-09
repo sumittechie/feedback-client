@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmService } from 'src/app/shared/components/confirm/confirm.service';
 import { IApiResponse, IUsers, IUserSave } from 'src/app/shared/models';
 import { LoggerService } from 'src/app/shared/services/logger.service';
 import { ManageComponent } from './manage/manage.component';
@@ -25,7 +26,8 @@ export class UsersComponent implements OnInit {
     private readonly _service: UsersService,
     private readonly _loader: NgxSpinnerService,
     private readonly _logger: LoggerService,
-    private readonly _modal: MatDialog
+    private readonly _modal: MatDialog,
+    private readonly _confirm: ConfirmService,
   ) {}
 
   private loadUsers() {
@@ -59,8 +61,35 @@ export class UsersComponent implements OnInit {
     this.upsert();
   }
 
-  onEdit(id: string) {}
-  onDelete(id: string) {}
+  onEdit(id: string) {
+    if (id) {
+      this._loader.show();
+      this._service.get(id).subscribe((response: IApiResponse) => {
+        this._loader.hide();
+        if (!response.error) {
+          this.upsert(response.data);
+        } else {
+          this._logger.error(response.message);
+        }
+      });
+    }
+  }
+
+  onDelete(id: string) {
+    this._confirm.open();
+    this._confirm.confirmed().subscribe((data: boolean) => {
+      if (data) {
+        this._service.delete(id).subscribe((response: IApiResponse) => {
+          if (!response.error) {
+            this._logger.success(response.data);
+            this.loadUsers();
+          } else {
+            this._logger.error(response.message);
+          }
+        });
+      }
+    });
+  }
 
   private upsert(data?: any) {
     const options: MatDialogConfig = {
