@@ -75,7 +75,7 @@ export class ManageComponent implements OnInit {
       )
     );
 
-    this._userService.getUsers().subscribe((response: IApiResponse) => {
+    this._userService.getDropdownUsers().subscribe((response: IApiResponse) => {
       if (!response.error) {
         this.allusers = response.data;
       } else {

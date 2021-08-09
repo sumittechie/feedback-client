@@ -1,1 +1,76 @@
-<p>manage works!</p>
+<h2 mat-dialog-title class="bg-accent">Create New User</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" fxLayout="column">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter full name" />
+      <mat-error *ngIf="name?.hasError('required')">
+        User full name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter email" />
+      <mat-error *ngIf="email?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('email')">
+        Please enter valid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mobile</mat-label>
+      <input
+        matInput
+        formControlName="mobile"
+        maxlength="10"
+        placeholder="Enter mobile number (10 digits)"
+      />
+      <mat-error *ngIf="mobile?.hasError('required')">
+        Mobile no is required
+      </mat-error>
+      <mat-error *ngIf="mobile?.hasError('pattern')">
+        Mobile no is not valid
+      </mat-error>
+      <mat-error *ngIf="mobile?.hasError('minlength')">
+        Mobile no should be 10 digit long.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>Gender</mat-label>
+    <mat-radio-group aria-label="Select an option" formControlName="gender">
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+      <mat-radio-button value="Others">Others</mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="gender?.hasError('required')">
+      Gender is required
+    </mat-error>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="Enter password" />
+      <mat-error *ngIf="password?.hasError('required')">
+        Password is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>Admin User</mat-label>
+    <mat-slide-toggle formControlName="isAdmin" color="accent">
+      {{ isAdmin ? "Yes" : "No" }}
+    </mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    [disabled]="form.invalid"
+    mat-stroked-button
+    cdkFocusInitial
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

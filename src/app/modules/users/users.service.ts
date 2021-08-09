@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IApiResponse } from 'src/app/shared/models';
+import { IApiResponse, IUsers, IUserSave } from 'src/app/shared/models';
 
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +14,19 @@ export class UsersService {
 
   constructor(private readonly _http: HttpClient) {}
 
-  getUsers(): Observable<IApiResponse> {
-    return this._http.get(this.api).pipe(map((response: any) => response));
+  getDropdownUsers(): Observable<IApiResponse> {
+    return this._http
+      .get(`${this.api}/dropdown`)
+      .pipe(map((response: any) => response));
+  }
+
+  getAll(): Observable<IApiResponse> {
+    return this._http.get(`${this.api}`).pipe(map((response: any) => response));
+  }
+
+  post(userObj: IUserSave): Observable<IApiResponse> {
+    return this._http
+      .post(this.api, userObj)
+      .pipe(map((response: any) => response));
   }
 }
