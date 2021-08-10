@@ -1,7 +1,7 @@
 <fb-header [sidenav]="leftSidenav"></fb-header>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #leftSidenav mode="side" opened>
-    <fb-navigation [role]="getRoles()"></fb-navigation>
+    <fb-navigation></fb-navigation>
   </mat-sidenav>
   <mat-sidenav-content
     [@onMainContentChange]="onSideNavChange ? 'open' : 'close'"

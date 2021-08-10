@@ -17,11 +17,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getRoles(): any {
-    return localStorage && localStorage.getItem('role')
-      ? localStorage.getItem('role')
-      : 'user';
-  }
 
   ngOnInit(): void {}
 }

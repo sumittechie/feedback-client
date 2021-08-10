@@ -54,6 +54,8 @@ export class LoginComponent implements OnInit {
         if (!response.error) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('role', response.data.role);
+          localStorage.setItem('name', response.data.name);
+          localStorage.setItem('photo', response.data.photo);
           this._router.navigate(['']);
         } else {
           this._logger.error(response.message);

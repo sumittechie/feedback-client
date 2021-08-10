@@ -27,7 +27,7 @@ import {
     state(
       'close',
       style({
-        'margin-left': '62px',
+        'margin-left': '72px',
       })
     ),
     state(

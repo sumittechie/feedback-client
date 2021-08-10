@@ -19,9 +19,17 @@ export class NavigationComponent implements OnInit {
     { name: 'Home', link: '', icon: 'home' },
     { name: 'Feeback', link: '/feedbacks', icon: 'assignments' },
   ];
-  @Input('role') role: string | null = null;
+  role: string | null = null;
+  name: string | null = null;
+  photo: string | null = null;
 
-  constructor(private _sidenavService: NavigationService) {}
+  constructor(private _sidenavService: NavigationService) {
+    if (localStorage) {
+      this.role = localStorage.getItem('role');
+      this.name = localStorage.getItem('name');
+      this.photo = localStorage.getItem('photo');
+    }
+  }
 
   ngOnInit() {
     if (this.role !== null && this.role === 'admin') {
