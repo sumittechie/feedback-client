@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IUsers } from 'src/app/shared/models';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { IApiResponse } from 'src/app/shared/models';
 import { IUserSave } from 'src/app/shared/models/i-user-save';
+import { LoggerService } from 'src/app/shared/services/logger.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'fb-manage',
@@ -13,10 +16,13 @@ export class ManageComponent implements OnInit {
   form!: FormGroup;
   isAdmin!: boolean;
   userDetails: any;
-
+  validationErrors: string[] = [];
   constructor(
     private readonly _fb: FormBuilder,
     private dialogRef: MatDialogRef<ManageComponent>,
+    private readonly _loader: NgxSpinnerService,
+    private readonly _logger: LoggerService,
+    private readonly _service: UsersService,
     @Inject(MAT_DIALOG_DATA) data?: any
   ) {
     this.userDetails = data;
@@ -86,11 +92,22 @@ export class ManageComponent implements OnInit {
       password: this.password?.value,
       email: this.email?.value,
     };
-
-    if (this.userDetails.id) {
+    if (this.userDetails && this.userDetails.id) {
       userObj.id = this.userDetails.id;
     }
 
-    this.dialogRef.close(userObj);
+    this._loader.show();
+    this._service.post(userObj).subscribe((response: IApiResponse) => {
+      this._loader.hide();
+      if (!response.error) {
+        this._logger.success(response.data);
+        this.dialogRef.close(true);
+      } else if (response.error && response.message === null) {
+        this.validationErrors = response.data;
+        console.log('errors', this.validationErrors);
+      } else {
+        this._logger.error(response.message);
+      }
+    });
   }
 }

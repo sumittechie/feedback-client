@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
     private readonly _loader: NgxSpinnerService,
     private readonly _logger: LoggerService,
     private readonly _modal: MatDialog,
-    private readonly _confirm: ConfirmService,
+    private readonly _confirm: ConfirmService
   ) {}
 
   private loadUsers() {
@@ -98,19 +98,9 @@ export class UsersComponent implements OnInit {
       data,
     };
     const dialogRef = this._modal.open(ManageComponent, options);
-    dialogRef.afterClosed().subscribe((response: IUserSave) => {
+    dialogRef.afterClosed().subscribe((response: boolean) => {
       if (response) {
-        console.log('User Reponse', response);
-        this._loader.show();
-        this._service.post(response).subscribe((response: IApiResponse) => {
-          this._loader.hide();
-          if (!response.error) {
-            this._logger.success(response.data);
-            this.loadUsers();
-          } else {
-            this._logger.error(response.message);
-          }
-        });
+        this.loadUsers();
       }
     });
   }

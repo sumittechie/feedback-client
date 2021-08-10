@@ -1,5 +1,16 @@
-<h2 mat-dialog-title class="bg-accent">Create New User</h2>
-<mat-dialog-content class="mat-typography">
+<h2 mat-dialog-title class="bg-accent">
+  {{ userDetails?.id ? "Update" : "Create New" }} User
+</h2>
+<mat-dialog-content
+  class="mat-typography"
+  [ngClass]="{ 'cont-max-height': validationErrors.length > 0 }"
+>
+  <div *ngIf="validationErrors.length > 0" class="errors">
+    <h4>Validation Errors:</h4>
+    <ul>
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
   <form [formGroup]="form" fxLayout="column">
     <mat-form-field>
       <mat-label>Name</mat-label>
