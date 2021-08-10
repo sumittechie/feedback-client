@@ -10,3 +10,4 @@ export * from './i-login-response';
 export * from './i-questions';
 export * from './i-users';
 export * from './i-user-save';
+export * from './i-replies';

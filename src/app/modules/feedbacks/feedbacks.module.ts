@@ -7,9 +7,10 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { ActionBarModule } from 'src/app/shared/components/action-bar/action-bar.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RepliesComponent } from './replies/replies.component';
 
 @NgModule({
-  declarations: [FeedbacksComponent, ManageComponent],
+  declarations: [FeedbacksComponent, ManageComponent, RepliesComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -18,7 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     RouterModule.forChild([
       { path: '', component: FeedbacksComponent },
-      { path: 'manage/:id', component: ManageComponent },
+      { path: 'replies/:id', component: RepliesComponent },
     ]),
   ],
   providers: [],
