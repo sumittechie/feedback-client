@@ -11,8 +11,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticateGuard implements CanActivate {
-  constructor(private readonly _router: Router) {}
+export class AuthorizeGuard implements CanActivate {
+  constructor(private _router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,7 +25,7 @@ export class AuthenticateGuard implements CanActivate {
     if (localStorage.getItem('token')) {
       return true;
     }
-    this._router.navigate(['/login']);
+    this._router.navigate(['/unauthorized']);
     return false;
   }
 }

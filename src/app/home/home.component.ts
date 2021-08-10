@@ -13,9 +13,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private readonly _sidenavService: NavigationService) {
     this._sidenavService.sideNavState$.subscribe((res) => {
-      console.log(res);
       this.onSideNavChange = res;
     });
+  }
+
+  getRoles(): any {
+    return localStorage && localStorage.getItem('role')
+      ? localStorage.getItem('role')
+      : 'user';
   }
 
   ngOnInit(): void {}

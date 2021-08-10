@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   animateText,
   onSideNavChange,
@@ -15,16 +15,23 @@ import { NavigationService } from '../../services/navigation.service';
 export class NavigationComponent implements OnInit {
   public sideNavState: boolean = true;
   public linkText: boolean = true;
-
   public pages: IPage[] = [
     { name: 'Home', link: '', icon: 'home' },
-    { name: 'Users', link: '/users', icon: 'manage_accounts' },
     { name: 'Feeback', link: '/feedbacks', icon: 'assignments' },
   ];
+  @Input('role') role: string | null = null;
 
   constructor(private _sidenavService: NavigationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.role !== null && this.role === 'admin') {
+      this.pages.push({
+        name: 'Users',
+        link: '/users',
+        icon: 'manage_accounts',
+      });
+    }
+  }
 
   onSinenavToggle() {
     this.sideNavState = !this.sideNavState;

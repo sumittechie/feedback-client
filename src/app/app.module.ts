@@ -20,9 +20,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalErrorHandler } from './shared/services/error-handler.service';
 import { HttpHeadersInterceptor } from './shared/interceptors/http-header.interceptor';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { PermissionComponent } from './permission/permission.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, PermissionComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

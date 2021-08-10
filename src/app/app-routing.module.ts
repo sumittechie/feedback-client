@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PermissionComponent } from './permission/permission.component';
 import { AuthenticateGuard } from './shared/guards/authenticate.guard';
+import { AuthorizeGuard } from './shared/guards/authorize.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +20,12 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'unauthorized',
+        component: PermissionComponent,
+      },
+      {
         path: 'users',
+        canActivate: [AuthorizeGuard],
         loadChildren: () =>
           import('./modules/users/users.module').then((m) => m.UsersModule),
       },

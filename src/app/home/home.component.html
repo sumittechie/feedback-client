@@ -1,9 +1,11 @@
 <fb-header [sidenav]="leftSidenav"></fb-header>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #leftSidenav mode="side" opened>
-    <fb-navigation></fb-navigation>
+    <fb-navigation [role]="getRoles()"></fb-navigation>
   </mat-sidenav>
-  <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+  <mat-sidenav-content
+    [@onMainContentChange]="onSideNavChange ? 'open' : 'close'"
+  >
     <div class="main_content">
       <router-outlet></router-outlet>
     </div>

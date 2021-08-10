@@ -5,7 +5,7 @@
         <mat-card fxFlex="75%" fxFlex.xs="100%" fxFlex.sm="33%">
           <mat-card-content>
             <div class="waiting" *ngIf="!reply.reply">Waitng for reply.</div>
-            <p>{{ reply.reply }}</p>
+            <p *ngIf="reply.reply">{{ reply.reply }}</p>
           </mat-card-content>
           <mat-card-header [ngClass]="{'float-right': i % 2 == 0 }">
             <img mat-card-avatar [src]="reply.photo" [alt]="reply.name" />
