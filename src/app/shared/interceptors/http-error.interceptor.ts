@@ -11,13 +11,15 @@ import { catchError } from 'rxjs/operators';
 import { LoggerService } from '../services/logger.service';
 import { LoginService } from 'src/app/login/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private readonly _logger: LoggerService,
     private readonly _loginService: LoginService,
-    private readonly _loader: NgxSpinnerService
+    private readonly _loader: NgxSpinnerService,
+    private readonly _router: Router
   ) {}
 
   intercept(
@@ -39,8 +41,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           }
 
           //Handle Http Error Status
-          if (error.status === 401 || error.status === 403) {
+          if (error.status === 401) {
             this._loginService.logout();
+          }
+
+          if(error.status === 403) {
+            this._router.navigate(['/unauthorized']);
           }
         }
         // need to rethrow so angular can catch the error

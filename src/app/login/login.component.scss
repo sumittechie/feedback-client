@@ -7,12 +7,17 @@
 .form {
   .header {
     padding: 0;
-    padding-top: 10px;
+    padding-top: 20px;
+    background-color: #ff0033;
   }
   .body {
     padding: 20px 20px 0 20px;
   }
   .footer {
     margin-right: 20px;
+  }
+  .mat-card-title {
+    color: #fff;
+    font-size:24px;
   }
 }
