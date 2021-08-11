@@ -37,7 +37,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
           if(error.status === 0) {
             this._logger.error('Web API server is unavailable.');
-            this._loginService.logout();
+            //this._loginService.logout();
           }
 
           //Handle Http Error Status

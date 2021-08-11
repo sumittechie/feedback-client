@@ -1,6 +1,6 @@
 <fb-action-bar title="Feedback List" (onCreate)="onCreate()"></fb-action-bar>
 
-<div *ngIf="tableData" class="fb-table">
+<div *ngIf="showTable" class="fb-table">
   <table mat-table [dataSource]="tableData" matSort class="table-bordered">
     <ng-container matColumnDef="feedbackId">
       <th mat-header-cell *matHeaderCellDef>Feedback ID</th>
@@ -28,22 +28,25 @@
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element" fxLayoutGap="1px">
         <button
+          matTooltip="Edit Record"
           mat-icon-button
-          color="primary"
+          color="amber"
           (click)="onEdit(element.feedbackId)"
         >
           <mat-icon>edit</mat-icon>
         </button>
         <button
+          matTooltip="View Replies"
           mat-icon-button
-          color="primary"
+          color="amber"
           routerLink="replies/{{ element.feedbackId }}"
         >
           <mat-icon>pageview</mat-icon>
         </button>
         <button
+          matTooltip="Delete Record"
           mat-icon-button
-          color="amber"
+          color="primary"
           (click)="onDelete(element.feedbackId)"
         >
           <mat-icon>delete</mat-icon>
@@ -57,4 +60,6 @@
   <mat-paginator [pageSizeOptions]="[15]" showFirstLastButtons></mat-paginator>
 </div>
 
-<div *ngIf="!tableData" class="no-data">No records found.</div>
+<div *ngIf="!showTable" class="no-data">No records found.</div>
+
+

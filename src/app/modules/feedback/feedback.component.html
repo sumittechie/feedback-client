@@ -1,14 +1,9 @@
-<mat-toolbar class="action-bar mat-elevation-z2">
-  <mat-toolbar-row fxLayout="row">
-    <h5 fxFlex="50%" fxLayoutAlign="start center">Home</h5>
-    <div fxFlex="50%" fxLayoutAlign="end center"></div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<fb-action-bar title="Home" [canCreate]="false"></fb-action-bar>
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px" *ngIf="questions">
     <div fxFlex="28.5%" fxFlex.xs="100%" fxFlex.sm="33%" class="reply-list">
       <ng-container *ngFor="let q of questions">
-        <mat-card (click)="onSelect(q.id)">
+        <mat-card matTooltip="click to reply" (click)="onSelect(q.id)">
           <mat-card-header>
             <img mat-card-avatar [src]="q.photo" [alt]="q.from" />
             <mat-card-title>{{ q.from }}</mat-card-title>

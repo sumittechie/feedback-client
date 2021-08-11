@@ -15,8 +15,8 @@ export class LoggerService {
   constructor(private _snackBar: MatSnackBar) {}
 
   success(message: string) {
-    this._snackBar.open(message, '', {
-      duration: 500,
+    this._snackBar.open(message, 'Ok', {
+      duration: 5000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: ['success-snackbar'],
@@ -24,8 +24,8 @@ export class LoggerService {
   }
 
   error(message: string) {
-    this._snackBar.open(message, 'ok', {
-      duration: 1000,
+    this._snackBar.open(message, 'Close', {
+      duration: 5000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: ['error-snackbar'],

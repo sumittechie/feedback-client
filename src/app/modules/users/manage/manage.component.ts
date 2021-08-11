@@ -42,7 +42,7 @@ export class ManageComponent implements OnInit {
         ],
       ],
       isAdmin: [data?.isAdmin || false],
-      gender: [data?.gender, Validators.required],
+      gender: [data?.gender || 'Male', Validators.required],
       password: ['', Validators.required],
     });
 
@@ -76,7 +76,6 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Response', this.userDetails);
     this.initForm(this.userDetails);
     this.admin?.valueChanges.subscribe(
       (flag: boolean) => (this.isAdmin = flag)

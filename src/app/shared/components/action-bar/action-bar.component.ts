@@ -7,9 +7,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ActionBarComponent {
   @Input() title?: string;
+  @Input() canCreate?: boolean;
   @Output('onCreate') create: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {}
+  constructor() {
+     this.canCreate = true;
+  }
 
   onCreate(): void {
     this.create.emit();

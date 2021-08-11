@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmService } from 'src/app/shared/components/confirm/confirm.service';
 import { IFeedbackRead } from 'src/app/shared/models';
-import { IApiResponse } from 'src/app/shared/models/i-api-response';
-import { IFeedbackSave } from 'src/app/shared/models/i-feedback-save';
-import { IFeedbacks } from 'src/app/shared/models/i-feedbacks';
-import { LoggerService } from 'src/app/shared/services/logger.service';
 import { FeedbacksService } from './feedbacks.service';
+import { MatPaginator } from '@angular/material/paginator';
 import { ManageComponent } from './manage/manage.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { IFeedbacks } from 'src/app/shared/models/i-feedbacks';
+import { IApiResponse } from 'src/app/shared/models/i-api-response';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { IFeedbackSave } from 'src/app/shared/models/i-feedback-save';
+import { LoggerService } from 'src/app/shared/services/logger.service';
+import { ConfirmService } from 'src/app/shared/components/confirm/confirm.service';
 
 @Component({
   selector: 'fb-feedbacks',
@@ -23,6 +23,7 @@ export class FeedbacksComponent implements OnInit {
   tableData!: MatTableDataSource<IFeedbacks>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  showTable: boolean = true;
 
   constructor(
     private readonly _service: FeedbacksService,
@@ -36,6 +37,7 @@ export class FeedbacksComponent implements OnInit {
     this._loader.show();
     this._service.getAll().subscribe((response: IApiResponse) => {
       if (!response.error) {
+        this.showTable = response.data.length > 0;
         this.tableData = new MatTableDataSource<IFeedbacks>(response.data);
         this.tableData.paginator = this.paginator;
         this.tableData.sort = this.sort;

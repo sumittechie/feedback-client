@@ -29,7 +29,7 @@ export class FeedbackComponent implements OnInit {
       if (!response.error) {
         this.questions = response.data;
         this._logger.success(
-          `You have new ${this.questions.length} feedback items waiting for reply`
+          `You have ${this.questions.length} new feedback items waiting for reply`
         );
       } else {
         this._logger.error(response.message);

@@ -1,15 +1,15 @@
 <div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px" *ngIf="replies.length > 0">
-    <div class="replies" >
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="replies.length > 0">
+    <div class="replies">
       <ng-container *ngFor="let reply of replies; let i = index">
-        <mat-card fxFlex="75%" fxFlex.xs="100%" fxFlex.sm="33%">
+        <mat-card>
           <mat-card-content>
             <div class="waiting" *ngIf="!reply.reply">Waitng for reply.</div>
             <p *ngIf="reply.reply">{{ reply.reply }}</p>
           </mat-card-content>
-          <mat-card-header [ngClass]="{'float-right': i % 2 == 0 }">
+          <mat-card-header [ngClass]="{ 'float-right': i % 2 == 0 }">
             <img mat-card-avatar [src]="reply.photo" [alt]="reply.name" />
-            <mat-card-title>{{ reply.name }} {{i % 2}}</mat-card-title>
+            <mat-card-title>{{ reply.name }} {{ i % 2 }}</mat-card-title>
             <mat-card-subtitle>{{
               reply.lastUpdated | date: "medium"
             }}</mat-card-subtitle>
