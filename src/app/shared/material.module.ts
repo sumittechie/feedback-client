@@ -89,7 +89,6 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-  
   ]
 })
 export class MaterialModule { }
